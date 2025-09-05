@@ -10,6 +10,7 @@ export default function Hero() {
   const videoRef = useRef(null)
   const [isMuted, setIsMuted] = useState(true)
   const [reduceMotion, setReduceMotion] = useState(false)
+  const [videoError, setVideoError] = useState(false)
   const hasVideo = !!hero.video?.src
   const videoFit = (hero.video?.fit === 'contain' ? 'contain' : 'cover')
 
@@ -45,19 +46,29 @@ export default function Hero() {
         />
       )}
 
-    {hasVideo && (
+    {hasVideo && !videoError && (
         <video
           ref={videoRef}
       className={`absolute inset-0 w-full h-full ${videoFit === 'contain' ? 'object-contain bg-transparent' : 'object-cover'}`}
-          src={hero.video.src}
+          // Prefer multiple sources when provided for better codec support
+          preload="metadata"
           poster={hero.image || undefined}
           autoPlay={!reduceMotion}
           playsInline
           muted={isMuted}
           controls={false}
           loop
+          onError={() => setVideoError(true)}
           style={{ objectPosition: hero.video?.position || 'center' }}
-        />
+        >
+          {Array.isArray(hero.video?.sources) && hero.video.sources.length > 0 ? (
+            hero.video.sources.map((s, i) => (
+              <source key={i} src={s.src} type={s.type} />
+            ))
+          ) : (
+            <source src={hero.video.src} type="video/mp4" />
+          )}
+        </video>
       )}
 
       {/* Cinematic scrim for text legibility */}
@@ -77,7 +88,7 @@ export default function Hero() {
       </div>
 
       {/* Mute/Unmute control */}
-      {hasVideo && (
+  {hasVideo && !reduceMotion && !videoError && (
         <div className="absolute bottom-4 right-4 z-10">
           <button
             type="button"
