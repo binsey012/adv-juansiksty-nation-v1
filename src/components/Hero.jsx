@@ -19,6 +19,8 @@ export default function Hero() {
   const resolve = (p) => (p && typeof p === 'string' && p.startsWith('/') ? base + p : p)
   const iframeRef = useRef(null)
   const vimeoPlayerRef = useRef(null)
+  const videoContainerRef = useRef(null)
+  const vimeoCoverRef = useRef(null)
 
   // Compute alignment for iframe "cover" positioning
   const pos = (hero.video?.position || 'center').toLowerCase()
@@ -83,6 +85,37 @@ export default function Hero() {
     }
     return () => { cancelled = true }
   }, [vimeoUrl, reduceMotion])
+
+  // Ensure Vimeo covers the container (like object-fit: cover)
+  useEffect(() => {
+    if (!vimeoUrl || !videoContainerRef.current || !vimeoCoverRef.current) return
+    const container = videoContainerRef.current
+    const cover = vimeoCoverRef.current
+    const videoRatio = Number(hero.video?.aspect) || (16 / 9)
+    const ro = new ResizeObserver(() => {
+      const w = container.clientWidth || 1
+      const h = container.clientHeight || 1
+      const containerRatio = w / h
+      let width, height
+      if (containerRatio > videoRatio) {
+        // container is wider; use full width
+        width = w
+        height = w / videoRatio
+      } else {
+        // container is taller; use full height
+        height = h
+        width = h * videoRatio
+      }
+      cover.style.width = `${width}px`
+      cover.style.height = `${height}px`
+      cover.style.position = 'absolute'
+      cover.style.top = '50%'
+      cover.style.left = '50%'
+      cover.style.transform = 'translate(-50%, -50%)'
+    })
+    ro.observe(container)
+    return () => ro.disconnect()
+  }, [vimeoUrl, hero.video?.aspect])
   return (
     <section className="relative overflow-hidden rounded-xl border border-white/10 bg-black min-h-[420px] sm:min-h-[500px] lg:min-h-[560px]">
       {/* Background: show image underneath; video sits on top if provided */}
@@ -98,8 +131,9 @@ export default function Hero() {
 
     {hasVideo && !videoError && !reduceMotion && (
         vimeoUrl ? (
-          <div className="absolute inset-0">
-            <iframe
+          <div ref={videoContainerRef} className="absolute inset-0 overflow-hidden">
+            <div ref={vimeoCoverRef}>
+              <iframe
               ref={iframeRef}
               title="hero-video"
               src={`${vimeoUrl}${vimeoUrl.includes('?') ? '&' : '?'}autoplay=1&muted=1&background=1&loop=1&autopause=0&playsinline=1&dnt=1&byline=0&title=0&portrait=0`}
@@ -107,6 +141,7 @@ export default function Hero() {
               referrerPolicy="strict-origin-when-cross-origin"
               style={{ border: 0, width: '100%', height: '100%' }}
             />
+            </div>
           </div>
         ) : (
           <video
