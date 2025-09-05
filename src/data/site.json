@@ -1,7 +1,11 @@
 {
   "hero": {
   "image": "/images/hero/poster.svg",
-  "video": { "src": "/videos/hero/hero-video.mp4", "fit": "cover", "position": "center" },
+  "video": {
+    "vimeoUrl": "https://player.vimeo.com/video/1116269351",
+    "fit": "cover",
+    "position": "center"
+  },
     "title": "ADV Juansiksty Nation RT",
     "subtitle": "SEC REGISTERED NO. 2023070108173-10",
     "cta": [

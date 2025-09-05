@@ -11,7 +11,9 @@ export default function Hero() {
   const [isMuted, setIsMuted] = useState(true)
   const [reduceMotion, setReduceMotion] = useState(false)
   const [videoError, setVideoError] = useState(false)
-  const hasVideo = !!hero.video?.src
+  const vimeoUrl = hero.video?.vimeoUrl || hero.video?.vimeo || null
+  const hasMp4 = !!hero.video?.src
+  const hasVideo = !!(vimeoUrl || hasMp4)
   const videoFit = (hero.video?.fit === 'contain' ? 'contain' : 'cover')
   const base = (import.meta?.env?.BASE_URL || '/').replace(/\/$/, '')
   const resolve = (p) => (p && typeof p === 'string' && p.startsWith('/') ? base + p : p)
@@ -48,29 +50,41 @@ export default function Hero() {
         />
       )}
 
-    {hasVideo && !videoError && (
-        <video
-          ref={videoRef}
-      className={`absolute inset-0 w-full h-full ${videoFit === 'contain' ? 'object-contain bg-transparent' : 'object-cover'}`}
-          // Prefer multiple sources when provided for better codec support
-          preload="metadata"
-          poster={resolve(hero.image) || undefined}
-          autoPlay={!reduceMotion}
-          playsInline
-          muted={isMuted}
-          controls={false}
-          loop
-          onError={() => setVideoError(true)}
-          style={{ objectPosition: hero.video?.position || 'center' }}
-        >
-          {Array.isArray(hero.video?.sources) && hero.video.sources.length > 0 ? (
-            hero.video.sources.map((s, i) => (
-              <source key={i} src={resolve(s.src)} type={s.type} />
-            ))
-          ) : (
-            <source src={resolve(hero.video.src)} type="video/mp4" />
-          )}
-        </video>
+    {hasVideo && !videoError && !reduceMotion && (
+        vimeoUrl ? (
+          <div className="absolute inset-0 w-full h-full">
+            <iframe
+              title="hero-video"
+              src={`${vimeoUrl}${vimeoUrl.includes('?') ? '&' : '?'}autoplay=1&muted=1&background=1&loop=1&autopause=0&playsinline=1&dnt=1`}
+              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              className="w-full h-full"
+              style={{ border: '0' }}
+            />
+          </div>
+        ) : (
+          <video
+            ref={videoRef}
+            className={`absolute inset-0 w-full h-full ${videoFit === 'contain' ? 'object-contain bg-transparent' : 'object-cover'}`}
+            preload="metadata"
+            poster={resolve(hero.image) || undefined}
+            autoPlay
+            playsInline
+            muted={true}
+            controls={false}
+            loop
+            onError={() => setVideoError(true)}
+            style={{ objectPosition: hero.video?.position || 'center' }}
+          >
+            {Array.isArray(hero.video?.sources) && hero.video.sources.length > 0 ? (
+              hero.video.sources.map((s, i) => (
+                <source key={i} src={resolve(s.src)} type={s.type} />
+              ))
+            ) : (
+              hasMp4 && <source src={resolve(hero.video.src)} type="video/mp4" />
+            )}
+          </video>
+        )
       )}
 
       {/* Cinematic scrim for text legibility */}
@@ -90,7 +104,7 @@ export default function Hero() {
       </div>
 
       {/* Mute/Unmute control */}
-  {hasVideo && !reduceMotion && !videoError && (
+  {hasMp4 && !reduceMotion && !videoError && !vimeoUrl && (
         <div className="absolute bottom-4 right-4 z-10">
           <button
             type="button"
