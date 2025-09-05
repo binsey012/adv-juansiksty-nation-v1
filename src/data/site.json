@@ -1,0 +1,106 @@
+{
+  "hero": {
+  "video": { "src": "/videos/hero/hero-video.mp4", "fit": "cover", "position": "center" },
+    "title": "ADV Juansiksty Nation RT",
+    "subtitle": "SEC REGISTERED NO. 2023070108173-10",
+    "cta": [
+      { "label": "Join the Club", "to": "/login", "variant": "primary" },
+      { "label": "Learn More", "to": "/about", "variant": "outline" }
+    ]
+  },
+  "brand": {
+  "logos": [
+      { "src": "/images/logos/brand-mark.png", "alt": "ADV Juansiksty" },
+      { "src": "/images/logos/partner-mark-1.png", "alt": "Partner 1" },
+      { "src": "/images/logos/partner-mark-2.png", "alt": "Partner 2" }
+    ],
+  "logoHeight": 44,
+    "favicon": "/images/logos/favicon.png"
+  },
+  "about": {
+    "mission": "To create a true home for ADV 160 owners—safe from negativity, spam, sales, and toxicity—where riders can belong to a family built on respect and camaraderie.",
+    "vision": "To become the first exclusive motorcycle riding community that offers the best deals with no membership fee, while promoting genuine brotherhood and camaraderie across the Philippines.",
+  "missionVisionImage": "/images/about/mission-vision.png",
+  "kapOverlayImage": "/images/about/kap-arki.png",
+  "aboutUs": "ADV Juansiksty Nation is more than a riding group—it’s a family. We unite ADV 160 owners from all over the Philippines, guided by respect, service, integrity, and teamwork. With our members and partners, we build not just rides, but lasting friendships and shared experiences.",
+  "history": "Founded in October 2022 and headed by Kap Arki (John Arnie Bonete), ADV Juansiksty Nation Roundtable was built on the foundation of its Core Values—manners, service, integrity, and teamwork. From the start, the vision was to create a safe and genuine community for motorcycle enthusiasts, free from toxicity, spam, and negativity.\n\nExclusively uniting proud owners of the Honda ADV 160 scooter, the group quickly grew from casual rides into a national brotherhood. More than just a riding club, it became a true home where camaraderie thrives, experiences are shared, and support is always present—on and off the road.\n\nToday, under Kap Arki’s leadership, ADV Juansiksty Nation Roundtable continues its journey across the open road—guided by passion, strengthened by values, and bonded by the spirit of family.",
+    "org": {
+      "name": "Founder",
+      "children": [
+        { "name": "Admins", "children": [ { "name": "Admin A" }, { "name": "Admin B" } ] },
+        { "name": "Moderators", "children": [ { "name": "Mod A" }, { "name": "Mod B" } ] }
+      ]
+    },
+    "coreValues": [
+      {
+        "title": "𝐌𝐚𝐧𝐧𝐞𝐫𝐬 𝐌𝐚𝐤𝐞𝐭𝐡 𝐌𝐚𝐧",
+        "text": "As ladies and gentlemen, we uphold discipline and tradition, treating each other with respect. True fellowship is built on our common goals."
+      },
+      {
+        "title": "𝐒𝐞𝐫𝐯𝐢𝐜𝐞 𝐀𝐛𝐨𝐯𝐞 𝐒𝐞𝐥𝐟",
+        "text": "In times of need—whether online or on the road—we offer help to the best of our ability. Selflessness and duty to one another define our spirit of service."
+      },
+      {
+        "title": "𝐈𝐧𝐭𝐞𝐠𝐫𝐢𝐭𝐲",
+        "text": "Integrity means self-control and incorruptibility. It is the foundation of success and higher goals. “Integrity is doing the right thing, even when no one is watching.”"
+      },
+      {
+        "title": "𝐓𝐞𝐚𝐦𝐰𝐨𝐫𝐤",
+        "text": "Teamwork grows from strong relationships. We value accountability and gratitude for every task, reflecting the trust we place in one another to deliver with excellence."
+      }
+    ]
+    ,
+    "stats": [
+      { "label": "Total Facebook Group Page members", "value": "17,000+" },
+      { "label": "Total Provinces", "value": "34" },
+      { "label": "Total Active Core Groups", "value": "34" },
+      { "label": "Total Registered Members", "value": "6700+" }
+    ],
+    "timeline": [
+      { "year": 2022, "title": "Founded", "description": "Roundtable established in October 2022 under Kap Arki, grounded on core values and safe community principles." },
+      { "year": 2023, "title": "Nationwide Rides", "description": "Chapters organized rides and outreach from Luzon to Mindanao; the community steadily grew." },
+      { "year": 2024, "title": "Partners & Programs", "description": "Formalized partnerships and safety programs to support members on and off the road." },
+      { "year": 2025, "title": "Expansion", "description": "Strengthened core groups and expanded activities across regions, keeping membership free." }
+    ],
+    "leadership": [
+      {
+        "name": "Kap Arki (John Arnie Bonete)",
+        "role": "Founder & Head",
+        "photo": "https://dummyimage.com/256x256/0b0b0b/ffffff&text=KA",
+        "socials": { "fb": "#", "ig": "#" }
+      },
+      {
+        "name": "Officer A",
+        "role": "Safety Officer",
+        "photo": "https://dummyimage.com/256x256/111111/ffffff&text=OA",
+        "socials": { "fb": "#", "ig": "#" }
+      },
+      {
+        "name": "Officer B",
+        "role": "Logistics Lead",
+        "photo": "https://dummyimage.com/256x256/161616/ffffff&text=OB",
+        "socials": { "fb": "#", "ig": "#" }
+      }
+    ],
+    "gallery": [
+      "https://images.unsplash.com/photo-1502877338535-766e1452684a?q=80&w=2069&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1508612761958-e931d843bdd4?q=80&w=2069&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=2069&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=2069&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?q=80&w=2069&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1473993702977-1706a7f23164?q=80&w=2069&auto=format&fit=crop"
+    ]
+  },
+  "contact": {
+    "mapImage": "https://maps.gstatic.com/tactile/basepage/pegman_sherlock.png",
+    "socials": [
+      { "label": "Facebook", "url": "#" },
+      { "label": "Instagram", "url": "#" },
+      { "label": "YouTube", "url": "#" }
+    ],
+    "quickLinks": [
+      { "label": "Join Us", "to": "/login", "variant": "primary" },
+      { "label": "Contact", "to": "/contact", "variant": "outline" }
+    ]
+  }
+}

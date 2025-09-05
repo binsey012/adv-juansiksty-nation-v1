@@ -1,0 +1,26 @@
+[
+  { "id": 1, "name": "ADV PH Loop",   "category": "National", "logo": "/images/partners/national/advPHLoop.png" },
+  { "id": 2, "name": "BN Asia",       "category": "National", "logo": "/images/partners/national/bnasia.png" },
+  { "id": 3, "name": "Bosbatusai",    "category": "National", "logo": "/images/partners/national/bosbatusai.png" },
+  { "id": 4, "name": "Chillride",     "category": "National", "logo": "/images/partners/national/chillride.png" },
+  { "id": 5, "name": "CRIT",          "category": "National", "logo": "/images/partners/national/crit.png" },
+  { "id": 6, "name": "DC Moto",       "category": "National", "logo": "/images/partners/national/dcmoto.png" },
+  { "id": 7, "name": "DLD",           "category": "National", "logo": "/images/partners/national/dld.png" },
+  { "id": 8, "name": "Driplus",       "category": "National", "logo": "/images/partners/national/driplus.png" },
+  { "id": 9, "name": "Freedcon",      "category": "National", "logo": "/images/partners/national/freedcon.png" },
+  { "id": 10, "name": "Guanzon",      "category": "National", "logo": "/images/partners/national/guanzon.png" },
+  { "id": 11, "name": "HJC",          "category": "National", "logo": "/images/partners/national/hjc.png" },
+  { "id": 12, "name": "K3",           "category": "National", "logo": "/images/partners/national/k3.png" },
+  { "id": 13, "name": "MJ Garage",    "category": "National", "logo": "/images/partners/national/mjgarage.png" },
+  { "id": 14, "name": "Moditech",     "category": "National", "logo": "/images/partners/national/moditech.png" },
+  { "id": 15, "name": "Parak",        "category": "National", "logo": "/images/partners/national/parak.png" },
+  { "id": 16, "name": "Pops",         "category": "National", "logo": "/images/partners/national/pops.png" },
+  { "id": 17, "name": "Shell",        "category": "National", "logo": "/images/partners/national/shell.png" },
+  { "id": 18, "name": "Vestmaker",    "category": "National", "logo": "/images/partners/national/vestmaker.png" },
+  { "id": 19, "name": "Wrap",         "category": "National", "logo": "/images/partners/national/wrap.png" },
+
+  { "id": 101, "name": "RideSafe Helmets", "category": "Special Events", "logo": "https://dummyimage.com/240x80/000/fff&text=RideSafe" },
+  { "id": 102, "name": "SpeedOil",         "category": "Special Events", "logo": "https://dummyimage.com/240x80/000/fff&text=SpeedOil" },
+  { "id": 201, "name": "Local Partner A",  "category": "Core Group",    "logo": "https://dummyimage.com/240x80/000/fff&text=Local+A" },
+  { "id": 202, "name": "Local Partner B",  "category": "Core Group",    "logo": "https://dummyimage.com/240x80/000/fff&text=Local+B" }
+]

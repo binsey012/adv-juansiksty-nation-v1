@@ -1,0 +1,23 @@
+[
+  { "id": 101, "title": "Baguio Highlands Run", "date": "2025-09-20", "location": "Baguio City", "description": "Cool breeze, twisties, and coffee stops." },
+  {
+    "id": 104,
+    "title": "KapaTHREEran LEG 1 – Grand Juan Convention: Day 1",
+    "date": "2025-09-20",
+    "location": "Davao Bamboo Sanctuary and Ecological Park, Malagos Baguio District, Davao City",
+  "description": "Celebration Program — 10:00 AM onwards. Register now: https://forms.gle/r4J3LhNpbSQfzD45A",
+  "image": "/images/news/kapathreeran-leg1.png",
+    "link": "https://forms.gle/r4J3LhNpbSQfzD45A"
+  },
+  {
+    "id": 105,
+    "title": "KapaTHREEran LEG 1 – Grand Juan Convention: Day 2",
+    "date": "2025-09-21",
+    "location": "Davao Bamboo Sanctuary and Ecological Park, Malagos Baguio District, Davao City",
+  "description": "ADVenturismo Charity Ride — 9:00 AM onwards. Register now: https://forms.gle/r4J3LhNpbSQfzD45A",
+  "image": "/images/news/kapathreeran-leg1.png",
+    "link": "https://forms.gle/r4J3LhNpbSQfzD45A"
+  },
+  { "id": 102, "title": "Ride & Rescue Drill", "date": "2025-10-05", "location": "Subic", "description": "Emergency response practice and drills." },
+  { "id": 103, "title": "Night Ride Manila", "date": "2025-10-19", "location": "Metro Manila", "description": "City loop, photos, and camaraderie." }
+]

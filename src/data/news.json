@@ -1,0 +1,14 @@
+[
+  { "id": 1, "title": "Nationwide Ride Out Announced", "excerpt": "Join the ADV Juansiksty Nation RT for a cross-province ride.", "date": "2025-08-01", "image": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=2070&auto=format&fit=crop" },
+  {
+    "id": 2,
+    "title": "JUAN MINDANAO Ride with us at KapaTHREEran LEG 1 – Grand Juan Convention",
+    "excerpt": "JUAN MINDANAO! Ride with us at KapaTHREEran LEG 1 – Grand Juan Convention on Sept 20–21, 2025. Register now.",
+    "content": "JUAN MINDANAO, MAG-INGAY! 🔥\nRide with us at KapaTHREEran LEG 1 – Grand Juan Convention this September 20–21, 2025!\nDay 1 (Sept 20): Celebration Program — 10:00 AM onwards\nDay 2 (Sept 21): ADVenturismo Charity Ride — 9:00 AM onwards\nRegister now: https://forms.gle/r4J3LhNpbSQfzD45A\n3 years. 1 nation. Tuloy ang pag-arangkada! 🛵💨\n#KapaTHREEran #GrandJuanConvention #ADVJuansikstyNation #RideWithPurpose #JuanVision #Leg1Mindanao #3rdAnniversary",
+    "date": "2025-09-20",
+    "image": "/images/news/kapathreeran-leg1.jpg"
+  },
+  { "id": 3, "title": "New Partner: MotoCare Hospital", "excerpt": "Exclusive benefits for members at MotoCare branches.", "date": "2025-07-10", "image": "https://images.unsplash.com/photo-1585421514738-01798e348b17?q=80&w=2069&auto=format&fit=crop" },
+  { "id": 4, "title": "Charity Ride for Education", "excerpt": "Riding with purpose to support local schools.", "date": "2025-06-28", "image": "https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=2070&auto=format&fit=crop" },
+  { "id": 5, "title": "Merch Drop: Jerseys & Stickers", "excerpt": "Get your official club gear while stocks last.", "date": "2025-06-10", "image": "https://images.unsplash.com/photo-1520975661595-6454e6758ba3?q=80&w=2070&auto=format&fit=crop" }
+]
