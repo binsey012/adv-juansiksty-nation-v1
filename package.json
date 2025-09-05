@@ -4,8 +4,9 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
+  "dev": "vite",
+  "prebuild": "node ./scripts/fetch-large-media.mjs",
+  "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
