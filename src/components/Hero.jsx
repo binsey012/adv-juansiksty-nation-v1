@@ -17,6 +17,25 @@ export default function Hero() {
   const videoFit = (hero.video?.fit === 'contain' ? 'contain' : 'cover')
   const base = (import.meta?.env?.BASE_URL || '/').replace(/\/$/, '')
   const resolve = (p) => (p && typeof p === 'string' && p.startsWith('/') ? base + p : p)
+  const iframeRef = useRef(null)
+  const vimeoPlayerRef = useRef(null)
+
+  // Compute alignment for iframe "cover" positioning
+  const pos = (hero.video?.position || 'center').toLowerCase()
+  const posStyle = useMemo(() => {
+    switch (pos) {
+      case 'top':
+        return { top: '0%', left: '50%', transform: 'translate(-50%, 0)' }
+      case 'bottom':
+        return { top: '100%', left: '50%', transform: 'translate(-50%, -100%)' }
+      case 'left':
+        return { top: '50%', left: '0%', transform: 'translate(0, -50%)' }
+      case 'right':
+        return { top: '50%', left: '100%', transform: 'translate(-100%, -50%)' }
+      default:
+        return { top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }
+    }
+  }, [pos])
 
   useEffect(() => {
     // Detect reduced motion preference
@@ -35,8 +54,35 @@ export default function Hero() {
       if (videoRef.current) {
         try { videoRef.current.pause() } catch {}
       }
+      // Destroy Vimeo player on unmount
+      try {
+        vimeoPlayerRef.current?.unload?.()
+      } catch {}
     }
   }, [])
+
+  // Load Vimeo Player API and control volume for mute/unmute
+  useEffect(() => {
+    if (!vimeoUrl || reduceMotion) return
+    let cancelled = false
+    function ready() {
+      if (cancelled || !iframeRef.current || window.Vimeo?.Player == null) return
+      const player = new window.Vimeo.Player(iframeRef.current)
+      vimeoPlayerRef.current = player
+      // Ensure autoplay-friendly state
+      player.setVolume(0).catch(() => {})
+    }
+    if (window.Vimeo?.Player) {
+      ready()
+    } else {
+      const s = document.createElement('script')
+      s.src = 'https://player.vimeo.com/api/player.js'
+      s.async = true
+      s.onload = ready
+      document.head.appendChild(s)
+    }
+    return () => { cancelled = true }
+  }, [vimeoUrl, reduceMotion])
   return (
     <section className="relative overflow-hidden rounded-xl border border-white/10 bg-black min-h-[420px] sm:min-h-[500px] lg:min-h-[560px]">
       {/* Background: show image underneath; video sits on top if provided */}
@@ -52,15 +98,27 @@ export default function Hero() {
 
     {hasVideo && !videoError && !reduceMotion && (
         vimeoUrl ? (
-          <div className="absolute inset-0 w-full h-full">
-            <iframe
-              title="hero-video"
-              src={`${vimeoUrl}${vimeoUrl.includes('?') ? '&' : '?'}autoplay=1&muted=1&background=1&loop=1&autopause=0&playsinline=1&dnt=1`}
-              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-              referrerPolicy="strict-origin-when-cross-origin"
-              className="w-full h-full"
-              style={{ border: '0' }}
-            />
+          <div className="absolute inset-0 overflow-hidden">
+            <div
+              className="absolute"
+              style={{
+                // cover behavior for 16:9 content
+                width: '177.78vh',
+                height: '100vh',
+                minWidth: '100%',
+                minHeight: '56.25vw',
+                ...posStyle,
+              }}
+            >
+              <iframe
+                ref={iframeRef}
+                title="hero-video"
+                src={`${vimeoUrl}${vimeoUrl.includes('?') ? '&' : '?'}autoplay=1&muted=1&background=1&loop=1&autopause=0&playsinline=1&dnt=1`}
+                allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                style={{ border: 0, width: '100%', height: '100%' }}
+              />
+            </div>
           </div>
         ) : (
           <video
@@ -104,20 +162,30 @@ export default function Hero() {
       </div>
 
       {/* Mute/Unmute control */}
-  {hasMp4 && !reduceMotion && !videoError && !vimeoUrl && (
+  {(!reduceMotion && !videoError) && (
         <div className="absolute bottom-4 right-4 z-10">
           <button
             type="button"
             className="btn btn-outline text-xs"
             onClick={() => {
-              const v = videoRef.current
-              if (!v) return
-              try {
-                // If reducing motion, do not force play on unmute
-                if (!reduceMotion && v.paused) v.play()
-              } catch {}
-              setIsMuted((m) => !m)
-              if (v) v.muted = !isMuted
+              if (vimeoUrl && vimeoPlayerRef.current) {
+                const player = vimeoPlayerRef.current
+                const nextMuted = !isMuted
+                setIsMuted(nextMuted)
+                // Vimeo API: adjust volume 0 or 1 on user interaction
+                player.setVolume(nextMuted ? 0 : 1).catch(() => {})
+                return
+              }
+              if (hasMp4) {
+                const v = videoRef.current
+                if (!v) return
+                try {
+                  if (!reduceMotion && v.paused) v.play()
+                } catch {}
+                const nextMuted = !isMuted
+                setIsMuted(nextMuted)
+                v.muted = nextMuted
+              }
             }}
             aria-label={isMuted ? 'Unmute hero video' : 'Mute hero video'}
           >
