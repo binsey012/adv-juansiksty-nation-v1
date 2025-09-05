@@ -3,7 +3,7 @@
   "image": "/images/hero/poster.svg",
   "video": {
     "vimeoUrl": "https://player.vimeo.com/video/1116269351",
-    "fit": "cover",
+  "fit": "contain",
     "position": "center"
   },
     "title": "ADV Juansiksty Nation RT",

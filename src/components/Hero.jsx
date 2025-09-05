@@ -86,7 +86,7 @@ export default function Hero() {
     return () => { cancelled = true }
   }, [vimeoUrl, reduceMotion])
 
-  // Ensure Vimeo covers the container (like object-fit: cover)
+  // Size Vimeo like CSS object-fit: cover|contain using ResizeObserver
   useEffect(() => {
     if (!vimeoUrl || !videoContainerRef.current || !vimeoCoverRef.current) return
     const container = videoContainerRef.current
@@ -97,14 +97,28 @@ export default function Hero() {
       const h = container.clientHeight || 1
       const containerRatio = w / h
       let width, height
-      if (containerRatio > videoRatio) {
-        // container is wider; use full width
-        width = w
-        height = w / videoRatio
+      const wantCover = (hero.video?.fit !== 'contain')
+      if (wantCover) {
+        if (containerRatio > videoRatio) {
+          // container is wider; use full width
+          width = w
+          height = w / videoRatio
+        } else {
+          // container is taller; use full height
+          height = h
+          width = h * videoRatio
+        }
       } else {
-        // container is taller; use full height
-        height = h
-        width = h * videoRatio
+        // contain: ensure whole video is visible
+        if (containerRatio > videoRatio) {
+          // container is wider; limit by height
+          height = h
+          width = h * videoRatio
+        } else {
+          // container is taller; limit by width
+          width = w
+          height = w / videoRatio
+        }
       }
       cover.style.width = `${width}px`
       cover.style.height = `${height}px`
@@ -115,7 +129,7 @@ export default function Hero() {
     })
     ro.observe(container)
     return () => ro.disconnect()
-  }, [vimeoUrl, hero.video?.aspect])
+  }, [vimeoUrl, hero.video?.aspect, hero.video?.fit])
   return (
     <section className="relative overflow-hidden rounded-xl border border-white/10 bg-black min-h-[420px] sm:min-h-[500px] lg:min-h-[560px]">
       {/* Background: show image underneath; video sits on top if provided */}
