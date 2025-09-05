@@ -17,7 +17,15 @@ export default function SmartImage({
 }) {
   const [loaded, setLoaded] = useState(false)
 
-  const placeholderSrc = useMemo(() => makeLowRes(src), [src])
+  const base = (import.meta?.env?.BASE_URL || '/').replace(/\/$/, '')
+  const resolvedSrc = useMemo(() => {
+    if (!src) return src
+    if (/^(https?:)?\/\//.test(src) || src.startsWith('data:')) return src
+    if (src.startsWith('/')) return base + src
+    return src
+  }, [src, base])
+
+  const placeholderSrc = useMemo(() => makeLowRes(resolvedSrc), [resolvedSrc])
 
   // Preload high-priority images (e.g., hero) for faster LCP
   useEffect(() => {
@@ -36,7 +44,7 @@ export default function SmartImage({
     return (
       <span className={`relative block ${className}`}>
         <img
-          src={src}
+          src={resolvedSrc}
           alt={alt}
           width={width}
           height={height}
@@ -64,7 +72,7 @@ export default function SmartImage({
         />
       )}
       <img
-        src={src}
+        src={resolvedSrc}
         alt={alt}
         width={width}
         height={height}

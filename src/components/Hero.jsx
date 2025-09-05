@@ -13,6 +13,8 @@ export default function Hero() {
   const [videoError, setVideoError] = useState(false)
   const hasVideo = !!hero.video?.src
   const videoFit = (hero.video?.fit === 'contain' ? 'contain' : 'cover')
+  const base = (import.meta?.env?.BASE_URL || '/').replace(/\/$/, '')
+  const resolve = (p) => (p && typeof p === 'string' && p.startsWith('/') ? base + p : p)
 
   useEffect(() => {
     // Detect reduced motion preference
@@ -36,9 +38,9 @@ export default function Hero() {
   return (
     <section className="relative overflow-hidden rounded-xl border border-white/10 bg-black min-h-[420px] sm:min-h-[500px] lg:min-h-[560px]">
       {/* Background: show image underneath; video sits on top if provided */}
-      {hero.image && (
+    {hero.image && (
         <SmartImage
-          src={hero.image}
+      src={resolve(hero.image)}
           alt="Hero background"
           priority
           className="absolute inset-0"
@@ -52,7 +54,7 @@ export default function Hero() {
       className={`absolute inset-0 w-full h-full ${videoFit === 'contain' ? 'object-contain bg-transparent' : 'object-cover'}`}
           // Prefer multiple sources when provided for better codec support
           preload="metadata"
-          poster={hero.image || undefined}
+          poster={resolve(hero.image) || undefined}
           autoPlay={!reduceMotion}
           playsInline
           muted={isMuted}
@@ -63,10 +65,10 @@ export default function Hero() {
         >
           {Array.isArray(hero.video?.sources) && hero.video.sources.length > 0 ? (
             hero.video.sources.map((s, i) => (
-              <source key={i} src={s.src} type={s.type} />
+              <source key={i} src={resolve(s.src)} type={s.type} />
             ))
           ) : (
-            <source src={hero.video.src} type="video/mp4" />
+            <source src={resolve(hero.video.src)} type="video/mp4" />
           )}
         </video>
       )}

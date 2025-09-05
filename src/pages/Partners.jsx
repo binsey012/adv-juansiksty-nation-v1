@@ -7,6 +7,8 @@ import { useData } from '../utils/useData.js'
 export default function Partners() {
   const { data: partners } = useData('partners')
   const [openCTA, setOpenCTA] = useState(false)
+  const base = (import.meta?.env?.BASE_URL || '/').replace(/\/$/, '')
+  const resolve = (p) => (p && typeof p === 'string' && p.startsWith('/') ? base + p : p)
 
   const groups = useMemo(() => ({
     National: partners.filter(p => p.category === 'National'),
@@ -80,7 +82,7 @@ export default function Partners() {
               <button className="btn btn-primary mt-3" onClick={() => setOpenCTA(true)}>Become a Partner</button>
             </div>
             <div className="rounded-md overflow-hidden border border-white/10 bg-white/5">
-              <SmartImage src={'/images/partners/partnership/partner-with-us.jpg'} alt="Partner With Us" className="w-full h-48" fit="contain" />
+              <SmartImage src={resolve('/images/partners/partnership/partner-with-us.jpg')} alt="Partner With Us" className="w-full h-48" fit="contain" />
             </div>
           </div>
         </Card>
@@ -90,7 +92,7 @@ export default function Partners() {
         <div className="space-y-3">
           <div className="text-lg font-semibold">Become a Partner</div>
           <div className="rounded-md overflow-hidden border border-white/10 bg-white/5">
-            <SmartImage src={'/images/partners/partnership/partner-with-us-modal.jpg'} alt="Partner With Us" className="w-full" fit="contain" />
+            <SmartImage src={resolve('/images/partners/partnership/partner-with-us-modal.jpg')} alt="Partner With Us" className="w-full" fit="contain" />
           </div>
         </div>
       </Modal>
