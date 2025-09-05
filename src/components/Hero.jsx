@@ -98,27 +98,15 @@ export default function Hero() {
 
     {hasVideo && !videoError && !reduceMotion && (
         vimeoUrl ? (
-          <div className="absolute inset-0 overflow-hidden">
-            <div
-              className="absolute"
-              style={{
-                // cover behavior for 16:9 content
-                width: '177.78vh',
-                height: '100vh',
-                minWidth: '100%',
-                minHeight: '56.25vw',
-                ...posStyle,
-              }}
-            >
-              <iframe
-                ref={iframeRef}
-                title="hero-video"
-                src={`${vimeoUrl}${vimeoUrl.includes('?') ? '&' : '?'}autoplay=1&muted=1&background=1&loop=1&autopause=0&playsinline=1&dnt=1`}
-                allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-                referrerPolicy="strict-origin-when-cross-origin"
-                style={{ border: 0, width: '100%', height: '100%' }}
-              />
-            </div>
+          <div className="absolute inset-0">
+            <iframe
+              ref={iframeRef}
+              title="hero-video"
+              src={`${vimeoUrl}${vimeoUrl.includes('?') ? '&' : '?'}autoplay=1&muted=1&background=1&loop=1&autopause=0&playsinline=1&dnt=1&byline=0&title=0&portrait=0`}
+              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              style={{ border: 0, width: '100%', height: '100%' }}
+            />
           </div>
         ) : (
           <video
